@@ -1,0 +1,9 @@
+output "vpc_id" { value = module.vpc.vpc_id }
+output "public_subnet_ids" { value = module.vpc.public_subnet_ids }
+output "private_app_subnet_ids" { value = module.vpc.private_app_subnet_ids }
+output "private_db_subnet_ids" { value = module.vpc.private_db_subnet_ids }
+output "nat_eip" { value = module.vpc.nat_eip_public_ip }
+output "alb_dns_name" { value = module.alb.alb_dns_name }
+output "asg_name" { value = module.compute.asg_name }
+output "rds_endpoint" { value = module.rds.endpoint }
+output "alb_logs_bucket" { value = module.alb.logs_bucket }

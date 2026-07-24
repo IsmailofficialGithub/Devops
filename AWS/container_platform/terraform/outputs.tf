@@ -1,0 +1,11 @@
+output "vpc_id" { value = module.vpc.vpc_id }
+output "nat_eip" { value = module.vpc.nat_eip }
+output "alb_dns_name" { value = module.alb.alb_dns_name }
+output "ecs_cluster" { value = module.ecs.cluster_name }
+output "ecs_service" { value = module.ecs.service_name }
+output "ecr_repository_url" { value = module.ecs.ecr_repository_url }
+output "rds_endpoint" { value = module.rds.endpoint }
+output "rds_secret_arn" { value = module.rds.secret_arn }
+output "redis_endpoint" { value = module.elasticache.primary_endpoint }
+output "sqs_queue_url" { value = module.messaging.queue_url }
+output "sns_topic_arn" { value = module.messaging.topic_arn }
