@@ -6,3 +6,4 @@ dist/
 environments/
 backups/
 *.log
+!**/examples/**/*.log
