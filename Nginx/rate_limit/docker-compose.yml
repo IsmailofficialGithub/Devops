@@ -1,0 +1,17 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "${HTTP_PORT}:80"
+    env_file: .env
+    volumes:
+      - ./templates:/etc/nginx/templates:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    image: hashicorp/http-echo:1.0
+    command: ["-text=rate-limit-backend", "-listen=:3000"]
+    expose: ["3000"]

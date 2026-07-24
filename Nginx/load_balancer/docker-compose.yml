@@ -1,0 +1,28 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "${HTTP_PORT}:80"
+    env_file: .env
+    volumes:
+      - ./templates:/etc/nginx/templates:ro
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+    restart: unless-stopped
+
+  backend1:
+    image: hashicorp/http-echo:1.0
+    command: ["-text=backend-1", "-listen=:3000"]
+    expose: ["3000"]
+
+  backend2:
+    image: hashicorp/http-echo:1.0
+    command: ["-text=backend-2", "-listen=:3000"]
+    expose: ["3000"]
+
+  backend3:
+    image: hashicorp/http-echo:1.0
+    command: ["-text=backend-3", "-listen=:3000"]
+    expose: ["3000"]

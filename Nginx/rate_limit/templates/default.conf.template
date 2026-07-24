@@ -1,0 +1,32 @@
+server {
+    listen 80;
+    server_name ${SERVER_NAME};
+
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-RateLimit-Policy "${RATE_RATE}; burst=${RATE_BURST}" always;
+
+    if ($$request_method !~ ^(GET|HEAD|POST|OPTIONS)$) {
+        return 405;
+    }
+
+    location / {
+        limit_req  zone=req_per_ip burst=${RATE_BURST} nodelay;
+        limit_conn conn_per_ip ${CONN_LIMIT};
+        limit_req_status 429;
+        limit_conn_status 429;
+
+        proxy_pass http://${BACKEND_HOST}:${BACKEND_PORT};
+        proxy_http_version 1.1;
+        proxy_set_header Host $$host;
+        proxy_set_header X-Real-IP $$remote_addr;
+        proxy_set_header X-Forwarded-For $$proxy_add_x_forwarded_for;
+        proxy_read_timeout ${PROXY_READ_TIMEOUT};
+    }
+
+    location = /health {
+        access_log off;
+        return 200 "ok\n";
+        add_header Content-Type text/plain;
+    }
+}
