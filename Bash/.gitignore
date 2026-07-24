@@ -1,0 +1,8 @@
+out/
+config/.env
+config/targets.conf
+config/checks.conf
+dist/
+environments/
+backups/
+*.log
