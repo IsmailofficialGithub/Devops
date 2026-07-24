@@ -1,0 +1,8 @@
+{
+  "name": "artifact-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "mkdir -p dist && node -e \"require('fs').writeFileSync('dist/app.txt','built '+new Date().toISOString())\""
+  }
+}

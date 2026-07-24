@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kustomize-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kustomize-demo
+  template:
+    metadata:
+      labels:
+        app: kustomize-demo
+    spec:
+      containers:
+        - name: app
+          image: library/nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kustomize-demo
+spec:
+  selector:
+    app: kustomize-demo
+  ports:
+    - port: 80
+      targetPort: 80

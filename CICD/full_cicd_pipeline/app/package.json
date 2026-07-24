@@ -1,0 +1,9 @@
+{
+  "name": "full-pipeline-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node -e \"console.log('ok')\"",
+    "build": "mkdir -p dist && echo full-pipeline > dist/build.txt"
+  }
+}
